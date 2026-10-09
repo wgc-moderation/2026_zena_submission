@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Sets the title shown on the browser tab -->
+  <title>{% block title %}Study Planner{% endblock %}</title>
+
+  <!-- Links this page to the main CSS file -->
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+  <!-- Main navigation bar -->
+  <nav class="navbar">
+
+    <!-- Clicking the logo takes the user back to the dashboard -->
+    <a href="/" class="logo-link">
+      <img src="/static/logo.png" alt="Study Planner Logo" class="nav-logo">
+      <h1 class="site-title">Study Planner</h1>
+    </a>
+
+    <!-- Links to the main pages of the website -->
+    <div class="nav-links">
+      <a href="/">Dashboard</a>
+      <a href="/tasks">Tasks</a>
+      <a href="/calendar">Calendar</a>
+      <a href="/timer">Study Timer</a>
+    </div>
+
+  </nav>
+
+  <!-- Main content for each page is inserted here -->
+  <main class="page">
+    {% block content %}{% endblock %}
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+<!-- Changes the browser tab title for the timer page -->
+{% block title %}Study Timer | Study Planner{% endblock %}
+
+{% block content %}
+
+<!-- Page heading -->
+<section class="page-header timer-page-header">
+  <h1>Study Timer</h1>
+</section>
+
+
+<!-- Main layout for the timer page -->
+<section class="timer-layout">
+
+  <!-- Main timer card -->
+  <div class="timer-card timer-main-card">
+
+    <!-- Shows what type of study session is selected -->
+    <p class="eyebrow">Study Session</p>
+    <h2 id="mode-title">Focus</h2>
+
+    <!-- Buttons for choosing between Pomodoro timer modes -->
+    <div class="timer-modes">
+
+      <!-- Sets the timer to a 25 minute focus session -->
+      <button
+        type="button"
+        class="timer-mode active-timer-mode"
+        id="focus-button"
+        onclick="setTimerMode('focus')"
+      >
+        Focus
+      </button>
+
+      <!-- Sets the timer to a short break -->
+      <button
+        type="button"
+        class="timer-mode"
+        id="short-button"
+        onclick="setTimerMode('short')"
+      >
+        Short Break
+      </button>
+
+      <!-- Sets the timer to a long break -->
+      <button
+        type="button"
+        class="timer-mode"
+        id="long-button"
+        onclick="setTimerMode('long')"
+      >
+        Long Break
+      </button>
+
+    </div>
+
+
+    <!-- Displays the current timer countdown -->
+    <div class="timer-display" id="timer-display">
+      25:00
+    </div>
+
+    <!-- Displays a message about the current timer session -->
+    <p class="timer-message" id="timer-message">
+      Focus session ready
+    </p>
+
+
+    <!-- Buttons for controlling the timer -->
+    <div class="timer-controls">
+
+      <!-- Starts the timer -->
+      <button
+        type="button"
+        onclick="startTimer()"
+      >
+        Start
+      </button>
+
+      <!-- Pauses the timer -->
+      <button
+        type="button"
+        class="secondary-timer-button"
+        onclick="pauseTimer()"
+      >
+        Pause
+      </button>
+
+      <!-- Resets the timer back to its starting time -->
+      <button
+        type="button"
+        class="secondary-timer-button"
+        onclick="resetTimer()"
+      >
+        Reset
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- Shows the user's study session progress -->
+  <div class="timer-card timer-side-card">
+
+    <h3>Session Progress</h3>
+
+    <!-- Shows how many focus sessions have been completed -->
+    <div class="session-counter-box">
+      <span id="session-count">0</span>
+      <p>Focus sessions completed</p>
+    </div>
+
+    <!-- Encouraging message for the user -->
+    <p class="timer-side-text">
+      Use focus sessions to support your study and make it feel more manageable!
+    </p>
+
+    <!-- Gives a short explanation of the Pomodoro method -->
+    <p class="pomodoro-info">
+      The Pomodoro Technique was created by Francesco Cirillo as a way to make
+      work and study feel more manageable. It uses a timer to split work into
+      focused intervals, traditionally 25 minutes long, followed by short breaks.
+      Each study interval is called a pomodoro, named after the tomato-shaped
+      kitchen timer Cirillo used as a university student.
+    </p>
+
+  </div>
+
+
+  <!-- Custom timer section -->
+  <div class="timer-card custom-timer-card">
+
+    <div>
+      <h4>Custom Timer</h4>
+
+      <p class="timer-side-text">
+        Choose how long you want to study for.
+      </p>
+    </div>
+
+    <!-- Lets the user enter their own timer length -->
+    <div class="custom-timer-controls"> 
+
+      <label for="custom-minutes">Custom minutes:</label>
+
+      <input
+        type="number"
+        id="custom-minutes"
+        min="1"
+        max="180"
+        placeholder="Minutes"
+      >
+
+      <!-- Applies the custom timer length -->
+      <button
+        type="button"
+        onclick="setCustomTimer()"
+      >
+        Set Timer
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- Connects this page to the JavaScript that makes the timer work -->
+<script src="/static/timer.js"></script>
+
+{% endblock %}

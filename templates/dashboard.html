@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+<!-- Changes the browser tab title for the dashboard page -->
+{% block title %}Dashboard | Study Planner{% endblock %}
+
+{% block content %}
+
+  <!-- Main welcome section at the top of the dashboard -->
+  <section class="hero-panel">
+    <div>
+      <p class="eyebrow">Study Planner</p>
+      <h1>Good Mahi!</h1>
+      <p>Stay organised to help keep the momentum going</p>
+    </div>
+
+    <!-- Takes the user to the tasks page to add a new task -->
+    <a href="/tasks" class="hero-button">Add New Task</a>
+  </section>
+
+  <!-- Shows the main task statistics -->
+  <section class="stats-grid">
+
+    <!-- Displays the total number of tasks -->
+    <div class="stat-card">
+      <p>Total Tasks</p>
+      <strong>{{ total_tasks }}</strong>
+    </div>
+
+    <!-- Displays the number of active tasks -->
+    <div class="stat-card">
+      <p>Active Tasks</p>
+      <strong>{{ active_tasks }}</strong>
+    </div>
+
+    <!-- Displays the number of completed tasks -->
+    <div class="stat-card">
+      <p>Completed</p>
+      <strong>{{ completed_tasks }}</strong>
+    </div>
+
+    <!-- Displays the number of active high priority tasks -->
+    <div class="stat-card warning-card">
+      <p>High Priority</p>
+      <strong>{{ high_priority_tasks }}</strong>
+    </div>
+
+  </section>
+
+  <!-- Main dashboard content -->
+  <section class="dashboard-grid">
+
+    <div>
+
+      <!-- Shows the closest active task -->
+      <div class="panel focus-panel">
+        <p class="eyebrow">Today's Focus</p>
+
+        <!-- Checks if there is an active task to display -->
+        {% if focus_task %}
+
+          <h2>{{ focus_task.title }}</h2>
+          <p>{{ focus_task.subject }}</p>
+
+          <!-- Only displays the due date if the task has one -->
+          {% if focus_task.due_date %}
+            <span class="date-badge">
+              Due {{ focus_task.due_date[8:10] }}/{{ focus_task.due_date[5:7] }}/{{ focus_task.due_date[0:4] }}
+            </span>
+          {% endif %}
+
+        <!-- Message shown if there are no active tasks -->
+        {% else %}
+          <h3>No active task selected</h3>
+          <p>Add a task to start planning your study time.</p>
+        {% endif %}
+
+      </div>
+
+      <!-- Shows the next upcoming deadlines -->
+      <div class="panel">
+        <h3>Upcoming Deadlines</h3>
+
+        <!-- Checks if there are upcoming tasks -->
+        {% if upcoming_tasks %}
+
+          <!-- Loops through each upcoming task -->
+          {% for task in upcoming_tasks %}
+
+            <div class="mini-task">
+              <div>
+                <strong>{{ task.title }}</strong>
+                <p>{{ task.subject }}</p>
+              </div>
+
+              <!-- Displays the due date in day/month/year format -->
+              <span>
+                {{ task.due_date[8:10] }}/{{ task.due_date[5:7] }}/{{ task.due_date[0:4] }}
+              </span>
+            </div>
+
+          {% endfor %}
+
+        <!-- Message shown if there are no upcoming deadlines -->
+        {% else %}
+          <p>No upcoming deadlines yet.</p>
+        {% endif %}
+
+      </div>
+
+    </div>
+
+    <div>
+
+      <!-- Quick links to the main website features -->
+      <div class="panel">
+        <h3>Quick Actions</h3>
+
+        <div class="dashboard-links stacked-links">
+          <a href="/tasks">Manage Tasks</a>
+          <a href="/calendar">View Calendar</a>
+          <a href="/timer">Start Study Timer</a>
+        </div>
+      </div>
+
+      <!-- Study tip section -->
+      <div class="panel tip-panel">
+        <h3>Study tip of the day!</h3>
+        <p>
+          Starting is the hardest part: tell yourself you only have to study for five minutes,
+          and if you still hate it, you can stop.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+{% endblock %}

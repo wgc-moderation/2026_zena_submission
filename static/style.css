@@ -1,0 +1,872 @@
+/* General page setup */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #faf4ea;
+  color: #2f2723;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 0 20px;
+}
+
+
+/* Navigation bar */
+
+.navbar {
+  background: #3b2f3f;
+  color: #fffaf3;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 4px solid #d96c5f;
+}
+
+/* Keeps the logo and website name together */
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Sets the size of the navigation logo */
+.nav-logo {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.logo-link:hover {
+  opacity: 0.85;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 14px;
+}
+
+.nav-links a {
+  color: #fffaf3;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.nav-links a:hover {
+  background: #594760;
+}
+
+
+/* Shared page headings and panels */
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+/* Works with either h1 or h2 while heading levels are being updated */
+.page-header h1,
+.page-header h2 {
+  font-size: 36px;
+  margin: 0 0 8px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #7c6f67;
+}
+
+.panel {
+  background: #fffaf3;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  border: 1px solid #ead8c8;
+  box-shadow: 0 10px 24px rgba(90, 65, 45, 0.08);
+}
+
+/* Keeps panel headings aligned even if the HTML heading level changes */
+.panel h2,
+.panel h3 {
+  margin-top: 0;
+}
+
+
+/* Shared forms, inputs and buttons */
+
+form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+input,
+select {
+  padding: 11px;
+  border: 1px solid #d8c2ad;
+  border-radius: 6px;
+  font-size: 15px;
+  background: #fffdf8;
+  color: #2f2723;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #d96c5f;
+  box-shadow: 0 0 0 3px rgba(217, 108, 95, 0.18);
+}
+
+button,
+.edit-link,
+.clear-link,
+.dashboard-links a {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 7px;
+  background: #d96c5f;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+}
+
+button:hover,
+.edit-link:hover,
+.dashboard-links a:hover {
+  background: #bd5147;
+}
+
+.clear-link {
+  background: #f2dfcf;
+  color: #3b2f3f;
+}
+
+.clear-link:hover {
+  background: #ead0bc;
+}
+
+
+/* Dashboard */
+
+.hero-panel {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  background: #fff0df;
+  color: #2f2723;
+  padding: 34px;
+  border-radius: 18px;
+  margin-bottom: 24px;
+  border: 1px solid #f0d0bd;
+  box-shadow: 0 14px 32px rgba(150, 95, 65, 0.14);
+}
+
+/* Works if Good Mahi is changed from h2 to h1 */
+.hero-panel h1,
+.hero-panel h2 {
+  font-size: 42px;
+  margin: 6px 0 10px;
+}
+
+.hero-panel p {
+  margin: 0;
+  color: #6f5f55;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #bd5147;
+}
+
+.hero-button {
+  background: #d96c5f;
+  color: white;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.hero-button:hover {
+  background: #bd5147;
+}
+
+/* Dashboard statistic cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #fffaf3;
+  border: 1px solid #ead8c8;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 24px rgba(90, 65, 45, 0.08);
+}
+
+.stat-card p {
+  margin: 0 0 10px;
+  color: #7c6f67;
+  font-weight: bold;
+}
+
+.stat-card strong {
+  font-size: 36px;
+  color: #d96c5f;
+}
+
+.warning-card {
+  border-left: 7px solid #d96c5f;
+}
+
+/* Main two-column dashboard layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+}
+
+/* Today's Focus card */
+.focus-panel {
+  background: #fff4df;
+  border-color: #e8c899;
+}
+
+.focus-panel h2,
+.focus-panel h3 {
+  font-size: 28px;
+  margin: 6px 0;
+}
+
+/* Study tip card */
+.tip-panel {
+  background: #eef5e9;
+  border-color: #cadfbd;
+}
+
+.tip-panel p {
+  color: #5d7058;
+  line-height: 1.5;
+}
+
+/* Quick action links */
+.dashboard-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stacked-links {
+  flex-direction: column;
+}
+
+/* Upcoming deadline rows */
+.mini-task {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #ead8c8;
+}
+
+.mini-task:last-child {
+  border-bottom: none;
+}
+
+.mini-task p {
+  margin: 4px 0 0;
+  color: #7c6f67;
+}
+
+.mini-task span,
+.date-badge {
+  font-weight: bold;
+  color: #8a5f00;
+  white-space: nowrap;
+}
+
+.date-badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #fff0c2;
+}
+
+
+/* Tasks page */
+
+/* Status and priority filter buttons */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filters a {
+  text-decoration: none;
+  padding: 8px 12px;
+  background: #f2dfcf;
+  color: #3b2f3f;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.filters a:hover {
+  background: #ead0bc;
+}
+
+.filters a.active-filter {
+  background: #8fae8b;
+  color: white;
+}
+
+/* Task cards */
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  background: #fffaf3;
+  border: 1px solid #ead8c8;
+  border-left: 7px solid #d9a441;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 20px rgba(90, 65, 45, 0.07);
+}
+
+/* Works if task titles use h2 or h3 */
+.task-card h2,
+.task-card h3 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.task-card p {
+  margin: 5px 0;
+}
+
+/* Complete, edit and delete controls */
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.actions form {
+  margin-bottom: 0;
+}
+
+.delete {
+  background: #9f3f3f;
+}
+
+.delete:hover {
+  background: #7f2f2f;
+}
+
+/* Completed task styling */
+.completed {
+  text-decoration: line-through;
+  color: #8a7c72;
+}
+
+.completed-card {
+  background: #f5efe6;
+  opacity: 0.9;
+  border-left-color: #8fae8b;
+}
+
+/* Active and completed status labels */
+.status {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.active-status {
+  background: #fff0c2;
+  color: #8a5f00;
+}
+
+.complete-status {
+  background: #dfeedd;
+  color: #4f734b;
+}
+
+/* Due date sorting controls */
+.sort-form {
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sort-form label {
+  font-weight: bold;
+}
+
+
+/* Calendar page */
+
+/* Previous month, month title and next month */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Works after changing the month heading from h3 to h2 */
+.calendar-header h2,
+.calendar-header h3 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.calendar-nav-button {
+  background: #d96c5f;
+  color: white;
+  text-decoration: none;
+  padding: 9px 13px;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.calendar-nav-button:hover {
+  background: #bd5147;
+}
+
+/* Creates the seven-column calendar */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+/* Monday to Sunday headings */
+.calendar-weekdays {
+  font-weight: bold;
+  text-align: center;
+  background: #f2dfcf;
+  border: 1px solid #ead8c8;
+}
+
+.calendar-weekdays div {
+  padding: 12px 6px;
+}
+
+/* Individual calendar days */
+.calendar-day {
+  min-height: 125px;
+  border: 1px solid #ead8c8;
+  padding: 8px;
+  background: #fffaf3;
+}
+
+.empty-day {
+  background: #f5efe6;
+}
+
+.calendar-day-number {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Highlights today's calendar box and date number */
+.today {
+  background: #fff0df;
+}
+
+.today .calendar-day-number {
+  background: #d96c5f;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tasks displayed inside each calendar day */
+.calendar-task {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.calendar-task-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Priority dots used beside calendar tasks */
+.priority-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.low-priority-dot {
+  background: #e7c74d;
+}
+
+.medium-priority-dot {
+  background: #e58b3a;
+}
+
+.high-priority-dot {
+  background: #c94f4f;
+}
+
+/* Key explaining the priority dot colours */
+.calendar-key {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.calendar-key span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+/* Study timer page */
+
+/* Centres the Study Timer page heading */
+.timer-page-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+/* Main timer page layout */
+.timer-layout {
+  max-width: 1250px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2.4fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+/* Shared styling used by each timer card */
+.timer-card {
+  background: #fffaf3;
+  border: 2px solid #4a3b50;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(74, 59, 80, 0.08);
+  padding: 32px;
+}
+
+/* Main countdown card */
+.timer-main-card {
+  min-height: 520px;
+}
+
+/* Styles the Focus heading without depending on its heading level */
+#mode-title {
+  margin: 4px 0 20px;
+  font-size: 34px;
+  color: #4a3b50;
+}
+
+.timer-main-card .eyebrow {
+  color: #cf6257;
+}
+
+/* Session progress heading */
+.timer-side-card h2,
+.timer-side-card h3,
+.timer-side-card h4 {
+  margin: 0 0 14px;
+  font-size: 24px;
+  color: #4a3b50;
+}
+
+/* Text inside the session progress card */
+.timer-side-text {
+  color: #756c67;
+  line-height: 1.5;
+  margin-top: 14px;
+  margin-bottom: 0;
+}
+
+.pomodoro-info {
+  margin-top: 18px;
+  color: #756c67;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* Completed focus session counter */
+.session-counter-box {
+  background: #e5ebdd;
+  border: 1px solid #bcc8b3;
+  border-radius: 14px;
+  padding: 22px 16px;
+  text-align: center;
+}
+
+.session-counter-box span {
+  display: block;
+  font-size: 44px;
+  font-weight: 700;
+  color: #4a3b50;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.session-counter-box p {
+  margin: 0;
+  color: #6d6762;
+}
+
+/* Focus, short break and long break buttons */
+.timer-modes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.timer-mode {
+  background: #e5ebdd;
+  color: #4a3b50;
+  border: 1px solid #bcc8b3;
+}
+
+.timer-mode:hover {
+  background: #d7e0cd;
+}
+
+/* Shows which timer mode is selected */
+.active-timer-mode {
+  background: #4a3b50;
+  color: white;
+  border-color: #4a3b50;
+}
+
+/* Large countdown number */
+.timer-display {
+  font-size: 110px;
+  font-weight: 700;
+  text-align: center;
+  color: #4a3b50;
+  line-height: 1;
+  margin: 34px 0 20px;
+}
+
+/* Message underneath the countdown */
+.timer-message {
+  text-align: center;
+  color: #756c67;
+  font-size: 18px;
+  margin-bottom: 28px;
+}
+
+/* Start, pause and reset buttons */
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.timer-controls button {
+  min-width: 120px;
+  background: #d96c5f;
+}
+
+.timer-controls button:hover {
+  background: #bd5147;
+}
+
+/* Gives the pause and reset buttons a darker colour */
+.timer-controls .secondary-timer-button {
+  background: #4a3b50;
+}
+
+.timer-controls .secondary-timer-button:hover {
+  background: #615167;
+}
+
+/* Custom timer card stretches underneath both columns */
+.custom-timer-card {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Custom timer heading */
+.custom-timer-card h2,
+.custom-timer-card h3,
+.custom-timer-card h4 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  color: #4a3b50;
+}
+
+/* Keeps the custom timer label, input and button together */
+.custom-timer-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.custom-timer-controls label {
+  font-weight: bold;
+}
+
+.custom-timer-controls input {
+  width: 120px;
+  background: #fffdf8;
+  border: 1px solid #ccbcae;
+}
+
+.custom-timer-controls button {
+  background: #d96c5f;
+}
+
+.custom-timer-controls button:hover {
+  background: #bd5147;
+}
+
+
+/* Responsive layout */
+
+/* Stacks the timer layout on smaller screens */
+@media (max-width: 850px) {
+  .timer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .timer-main-card {
+  min-height: 0;
+  }
+
+  .timer-display {
+    font-size: 80px;
+  }
+
+  .custom-timer-card {
+    grid-column: 1;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Stacks dashboard sections and allows the calendar to scroll */
+@media (max-width: 800px) {
+  .hero-panel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stats-grid,
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-panel {
+    overflow-x: auto;
+  }
+
+  .calendar-grid {
+    min-width: 750px;
+  }
+}
+
+/* Adjusts navigation, tasks and forms for smaller screens */
+@media (max-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px 20px;
+  }
+
+  .task-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  input,
+  select,
+  button {
+    width: 100%;
+  }
+
+  .actions {
+    width: 100%;
+  }
+}
+
+/* Makes the timer easier to use on phone-sized screens */
+@media (max-width: 600px) {
+  .timer-card {
+    padding: 24px;
+  }
+
+  .timer-display {
+    font-size: 62px;
+  }
+
+  .timer-controls {
+    flex-direction: column;
+  }
+
+  .timer-controls button {
+    width: 100%;
+  }
+
+  .custom-timer-controls {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .custom-timer-controls input,
+  .custom-timer-controls button {
+    width: 100%;
+  }
+}

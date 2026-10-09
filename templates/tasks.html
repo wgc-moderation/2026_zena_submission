@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+
+<!-- Changes the browser tab title for the tasks page -->
+{% block title %}Tasks | Study Planner{% endblock %}
+
+{% block content %}
+
+  <!-- Page heading -->
+  <section class="page-header">
+    <h1>Tasks</h1>
+    <p>Add, organise, complete, and manage your study tasks.</p>
+  </section>
+
+  <!-- Section for adding a new task -->
+  <section class="panel">
+
+    <h2>Add New Task</h2>
+
+    <!-- Form sends the new task information to Flask -->
+    <form action="/add" method="post">
+
+      <!-- Gets the task title -->
+      <input
+        type="text"
+        name="title"
+        placeholder="Task title"
+        required
+      >
+
+      <!-- Gets the subject linked to the task -->
+      <input
+        type="text"
+        name="subject"
+        placeholder="Subject"
+        required
+      >
+
+      <!-- Allows the user to choose a due date -->
+      <input type="date" name="due_date">
+
+      <!-- Allows the user to choose a priority level -->
+      <select name="priority">
+        <option value="Low">Low</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="High">High</option>
+      </select>
+
+      <!-- Adds the task to the database -->
+      <button type="submit">Add Task</button>
+
+    </form>
+
+  </section>
+
+  <!-- Section containing all task controls and task cards -->
+  <section class="panel">
+
+    <h3>Your Tasks</h3>
+
+    <!-- Filters tasks by completion status -->
+    <div class="filters">
+
+      <!-- Shows all tasks -->
+      <a
+        href="/tasks?filter=all&priority={{ priority_filter }}&search={{ search }}&sort={{ sort }}"
+        class="{% if task_filter == 'all' %}active-filter{% endif %}"
+      >
+        All
+      </a>
+
+      <!-- Shows only active tasks -->
+      <a
+        href="/tasks?filter=active&priority={{ priority_filter }}&search={{ search }}&sort={{ sort }}"
+        class="{% if task_filter == 'active' %}active-filter{% endif %}"
+      >
+        Active
+      </a>
+
+      <!-- Shows only completed tasks -->
+      <a
+        href="/tasks?filter=completed&priority={{ priority_filter }}&search={{ search }}&sort={{ sort }}"
+        class="{% if task_filter == 'completed' %}active-filter{% endif %}"
+      >
+        Completed
+      </a>
+
+    </div>
+
+    <!-- Filters tasks by priority -->
+    <div class="filters">
+
+      <!-- Shows tasks of every priority -->
+      <a
+        href="/tasks?filter={{ task_filter }}&priority=all&search={{ search }}&sort={{ sort }}"
+        class="{% if priority_filter == 'all' %}active-filter{% endif %}"
+      >
+        All Priorities
+      </a>
+
+      <!-- Shows only low priority tasks -->
+      <a
+        href="/tasks?filter={{ task_filter }}&priority=Low&search={{ search }}&sort={{ sort }}"
+        class="{% if priority_filter == 'Low' %}active-filter{% endif %}"
+      >
+        Low
+      </a>
+
+      <!-- Shows only medium priority tasks -->
+      <a
+        href="/tasks?filter={{ task_filter }}&priority=Medium&search={{ search }}&sort={{ sort }}"
+        class="{% if priority_filter == 'Medium' %}active-filter{% endif %}"
+      >
+        Medium
+      </a>
+
+      <!-- Shows only high priority tasks -->
+      <a
+        href="/tasks?filter={{ task_filter }}&priority=High&search={{ search }}&sort={{ sort }}"
+        class="{% if priority_filter == 'High' %}active-filter{% endif %}"
+      >
+        High
+      </a>
+
+    </div>
+
+    <!-- Search form for finding tasks by title or subject -->
+    <form action="/tasks" method="get" class="search-form">
+
+      <!-- Keeps the current filters and sort option while searching -->
+      <input
+        type="hidden"
+        name="filter"
+        value="{{ task_filter }}"
+      >
+
+      <input
+        type="hidden"
+        name="priority"
+        value="{{ priority_filter }}"
+      >
+
+      <input
+        type="hidden"
+        name="sort"
+        value="{{ sort }}"
+      >
+
+      <!-- Gets the user's search -->
+      <input
+        type="text"
+        name="search"
+        placeholder="Search tasks"
+        value="{{ search }}"
+      >
+
+      <button type="submit">Search</button>
+
+      <!-- Clears the search but keeps the current filters -->
+      <a
+        href="/tasks?filter={{ task_filter }}&priority={{ priority_filter }}&sort={{ sort }}"
+        class="clear-link"
+      >
+        Clear
+      </a>
+
+    </form>
+
+    <!-- Form for sorting tasks by due date -->
+    <form action="/tasks" method="get" class="sort-form">
+
+      <!-- Keeps the current filters and search while sorting -->
+      <input
+        type="hidden"
+        name="filter"
+        value="{{ task_filter }}"
+      >
+
+      <input
+        type="hidden"
+        name="priority"
+        value="{{ priority_filter }}"
+      >
+
+      <input
+        type="hidden"
+        name="search"
+        value="{{ search }}"
+      >
+
+      <label for="sort">Sort by due date:</label>
+
+      <!-- Allows the user to choose how the tasks are ordered -->
+      <select name="sort" id="sort">
+
+        <!-- Keeps the selected sort option shown -->
+        <option
+          value="none"
+          {% if sort == 'none' %}selected{% endif %}
+        >
+          Default
+        </option>
+
+        <option
+          value="oldest"
+          {% if sort == 'oldest' %}selected{% endif %}
+        >
+          Oldest first
+        </option>
+
+        <option
+          value="newest"
+          {% if sort == 'newest' %}selected{% endif %}
+        >
+          Newest first
+        </option>
+
+      </select>
+
+      <button type="submit">Sort</button>
+
+    </form>
+
+    <!-- Checks if there are any tasks to display -->
+    {% if tasks %}
+
+      <!-- Loops through every task returned from the database -->
+      {% for task in tasks %}
+
+        <!-- Creates a card for each task -->
+        <div class="task-card {% if task.completed %}completed-card{% endif %}">
+
+          <div>
+
+            <!-- Shows the task title -->
+            <h3 class="{% if task.completed %}completed{% endif %}">
+              {{ task.title }}
+            </h3>
+
+            <!-- Displays the main task information -->
+            <p>Subject: {{ task.subject }}</p>
+
+            <!-- Displays the due date in day/month/year format -->
+            <p>
+              Due date:
+              {{ task.due_date[8:10] }}/{{ task.due_date[5:7] }}/{{ task.due_date[0:4] }}
+            </p>
+
+            <p>Priority: {{ task.priority }}</p>
+
+            <!-- Displays a different status depending on whether the task is complete -->
+            {% if task.completed %}
+              <p class="status complete-status">
+                Status: Complete
+              </p>
+            {% else %}
+              <p class="status active-status">
+                Status: Active
+              </p>
+            {% endif %}
+
+          </div>
+
+          <!-- Buttons for completing, editing or deleting a task -->
+          <div class="actions">
+
+            <!-- Only shows the complete button if the task is still active -->
+            {% if not task.completed %}
+              <form action="/complete/{{ task.id }}" method="post">
+                <button type="submit">Complete</button>
+              </form>
+            {% endif %}
+
+            <!-- Takes the user to the edit page for this task -->
+            <a href="/edit/{{ task.id }}" class="edit-link">
+              Edit
+            </a>
+
+            <!-- Deletes the selected task -->
+            <form action="/delete/{{ task.id }}" method="post">
+              <button type="submit" class="delete">
+                Delete
+              </button>
+            </form>
+
+          </div>
+
+        </div>
+
+      {% endfor %}
+
+    <!-- Message shown when no tasks match the selected filters -->
+    {% else %}
+      <p>No tasks found.</p>
+    {% endif %}
+
+  </section>
+
+{% endblock %}

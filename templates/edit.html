@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<head>
+  <!-- Sets the title shown on the browser tab -->
+  <title>Edit Task</title>
+
+  <!-- Links this page to the main CSS file -->
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+  <!-- Main content for the edit task page -->
+  <main>
+
+    <!-- Page heading -->
+    <h1>Edit Task</h1>
+
+    <!-- Form sends the updated task information back to Flask -->
+    <form action="/update/{{ task.id }}" method="post">
+
+      <!-- Shows the current task title and allows it to be changed -->
+      <input
+        type="text"
+        name="title"
+        value="{{ task.title }}"
+        required
+      >
+
+      <!-- Shows the current subject and allows it to be changed -->
+      <input
+        type="text"
+        name="subject"
+        value="{{ task.subject }}"
+        required
+      >
+
+      <!-- Shows the current due date and allows it to be changed -->
+      <input
+        type="date"
+        name="due_date"
+        value="{{ task.due_date }}"
+      >
+
+      <!-- Allows the user to change the task priority -->
+      <select name="priority">
+
+        <!-- Keeps the task's current priority selected -->
+        <option
+          value="Low"
+          {% if task.priority == 'Low' %}selected{% endif %}
+        >
+          Low
+        </option>
+
+        <option
+          value="Medium"
+
+
+      <!-- Saves the changes made to the task -->
+      <button type="submit">Save Changes</button>
+
+    </form>
+
+    <!-- Leaves the edit page without saving changes -->
+    <a href="/">Cancel</a>
+
+  </main>
+
+</body>
+</html>
+

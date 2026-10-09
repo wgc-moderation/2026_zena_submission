@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+<!-- Changes the browser tab title for the calendar page -->
+{% block title %}Calendar | Study Planner{% endblock %}
+
+{% block content %}
+
+<!-- Page heading -->
+<section class="page-header">
+  <h1>Calendar</h1>
+  <p>View your upcoming tasks by due date.</p>
+</section>
+
+<!-- Main calendar section -->
+<section class="panel calendar-panel">
+
+  <!-- Calendar navigation for moving between months -->
+  <div class="calendar-header">
+
+    <!-- Link to the previous month -->
+    <a
+      href="/calendar?year={{ previous_year }}&month={{ previous_month }}"
+      class="calendar-nav-button"
+    >
+      ← Previous
+    </a>
+
+    <!-- Shows the current month and year being viewed -->
+    <h3>{{ month_name }} {{ year }}</h3>
+
+    <!-- Link to the next month -->
+    <a
+      href="/calendar?year={{ next_year }}&month={{ next_month }}"
+      class="calendar-nav-button"
+    >
+      Next →
+    </a>
+
+  </div>
+
+  <!-- Displays the days of the week -->
+  <div class="calendar-grid calendar-weekdays">
+    <div>Monday</div>
+    <div>Tuesday</div>
+    <div>Wednesday</div>
+    <div>Thursday</div>
+    <div>Friday</div>
+    <div>Saturday</div>
+    <div>Sunday</div>
+  </div>
+
+  <!-- Main calendar grid -->
+  <div class="calendar-grid">
+
+    <!-- Goes through each week in the selected month -->
+    {% for week in month_calendar %}
+
+      <!-- Goes through each day in the week -->
+      {% for day in week %}
+
+        <!-- A day of 0 is used for empty spaces outside the month -->
+        {% if day == 0 %}
+
+          <div class="calendar-day empty-day"></div>
+
+        {% else %}
+
+          <!-- Creates a box for each day -->
+          <div
+            class="calendar-day
+            {% if day == today.day and month == today.month and year == today.year %}
+              today
+            {% endif %}"
+          >
+
+            <!-- Displays the date number -->
+            <div class="calendar-day-number">
+              {{ day }}
+            </div>
+
+            <!-- Holds all tasks due on this day -->
+            <div class="calendar-tasks">
+
+              <!-- Loops through tasks that match this date -->
+              {% for task in tasks_by_day.get(day, []) %}
+
+                <div class="calendar-task">
+
+                  <!-- Gives each task a coloured dot based on its priority -->
+                  <span
+                    class="priority-dot
+                    {% if task.priority == 'High' %}
+                      high-priority-dot
+                    {% elif task.priority == 'Medium' %}
+                      medium-priority-dot
+                    {% else %}
+                      low-priority-dot
+                    {% endif %}"
+                  ></span>
+
+                  <!-- Displays the task title -->
+                  <span class="calendar-task-title">
+                    {{ task.title }}
+                  </span>
+
+                </div>
+
+              {% endfor %}
+
+            </div>
+
+          </div>
+
+        {% endif %}
+
+      {% endfor %}
+
+    {% endfor %}
+
+  </div>
+
+  <!-- Key showing what each priority colour means -->
+  <div class="calendar-key">
+    <span><span class="priority-dot low-priority-dot"></span> Low</span>
+    <span><span class="priority-dot medium-priority-dot"></span> Medium</span>
+    <span><span class="priority-dot high-priority-dot"></span> High</span>
+  </div>
+
+</section>
+
+{% endblock %}
